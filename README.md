@@ -22,13 +22,19 @@
 
 ## Pasos de Ejecución ##
 * Levantar la arquitectura:
+  
   sudo docker-compose up --build
   
 * Activar tu entorno virtual local:
+  
   python3 -m venv entorno_backend
-  source entorno_backend/bin/activate  
+  
+  source entorno_backend/bin/activate
+  
   pip install -r requirements.txt
 
 * Lanzar el ataque:
+
   python generador_trafico.py
+  
   python analizar_metricas.py
