@@ -38,3 +38,24 @@
   python generador_trafico.py
   
   python analizar_metricas.py
+
+## Para ejecutar todo de nuevo (cambiando el tamaño de caché)
+* Terminal 1, apaga y destruye todo rastro:
+
+  sudo docker-compose down -v --remove-orphans
+
+* Terminal 1, borra el archivo:
+
+  rm metricas.csv
+
+* Terminal 1, levantar el servidor limpio:
+
+  sudo docker-compose up --build
+
+* Terminal 2, lanzar el ataque:
+
+  python generador_trafico.py
+
+* Terminal 2, analizar las metricas obtenidas:
+
+  python analizar_metricas.py
