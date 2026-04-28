@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  redis-db:
+    image: redis:alpine
+    command: redis-server --maxmemory 500mb --maxmemory-policy allkeys-lru
+    ports:
+      - "6379:6379"
+
+  backend:
+    build: .
+    command: uvicorn generadorDeRespuestas:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+
+  cache-proxy:
+    build: .
+    command: uvicorn modulo_cache:app --host 0.0.0.0 --port 8001
+    ports:
+      - "8001:8001"
+    volumes:
+      - .:/app
+    depends_on:
+      - backend
+      - redis-db
