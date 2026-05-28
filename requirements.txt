@@ -1,6 +1,4 @@
 fastapi
 uvicorn
-pandas
-numpy
-redis
+kafka-python
 requests
