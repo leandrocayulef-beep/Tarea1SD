@@ -66,7 +66,7 @@ def ejecutar_test(distribucion, total_peticiones):
         indices = np.random.zipf(parametro_zipf, total_peticiones)
         
         for idx in indices:
-            # Ajustamos el índice para que no se salga de nuestra lista de 15 consultas
+            # se ajusta el índice para que no se salga de la lista de 15 consultas
             indice_ajustado = (idx - 1) % len(CONSULTAS_POSIBLES)
             consultas_a_enviar.append(CONSULTAS_POSIBLES[indice_ajustado])
 
@@ -93,12 +93,11 @@ if __name__ == "__main__":
     time.sleep(3)
     
     # Ronda 1: Caos total (100 peticiones)
-    ejecutar_test(distribucion="uniforme", total_peticiones=100)
+    ejecutar_test(distribucion="uniforme", total_peticiones=1000)
     
     # Ronda 2: Tendencia realista (100 peticiones)
-    ejecutar_test(distribucion="zipf", total_peticiones=100)
+    ejecutar_test(distribucion="zipf", total_peticiones=1000)
     
-    # EL COMANDO MÁGICO: Obligar a vaciar la RAM y enviar todo al servidor de Docker
     print("Vaciando búfer y asegurando la entrega a Kafka...")
     productor.flush()
     print("¡Todos los mensajes han sido forzados a salir y entregados a Kafka exitosamente!")
